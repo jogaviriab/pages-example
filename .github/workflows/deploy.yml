@@ -16,28 +16,20 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
-
       - name: Setup Node.js environment
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-
       - name: Install dependencies
         run: npm install
-
       - name: Build the site
         run: npm run build
-
-      - name: Upload build output to GitHub Pages artifact
-        uses: actions/upload-pages-artifact@v2
-        with:
-          path: ./dist # <-- Asegúrate que sea la carpeta generada por tu build
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
     environment:
-      name: github-pages
+      name: pages-example
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Deploy to GitHub Pages
